@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/rfid-sensors/static/css/main.4052ef7a.css",
+    "main.js": "/rfid-sensors/static/js/main.cf78757b.js",
+    "static/js/453.de1cfe4d.chunk.js": "/rfid-sensors/static/js/453.de1cfe4d.chunk.js",
+    "index.html": "/rfid-sensors/index.html",
+    "main.4052ef7a.css.map": "/rfid-sensors/static/css/main.4052ef7a.css.map",
+    "main.cf78757b.js.map": "/rfid-sensors/static/js/main.cf78757b.js.map",
+    "453.de1cfe4d.chunk.js.map": "/rfid-sensors/static/js/453.de1cfe4d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4052ef7a.css",
+    "static/js/main.cf78757b.js"
+  ]
+}

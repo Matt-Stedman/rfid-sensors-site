@@ -1,0 +1,6 @@
+{
+	"short_name": "RFID Temp. Scan.",
+	"name": "RFID Temperature Scanner, by Matt Stedman",
+	"start_url": ".",
+	"display": "standalone"
+}
