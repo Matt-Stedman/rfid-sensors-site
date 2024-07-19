@@ -1,6 +1,6 @@
 body {
 	margin: 0;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+	font-family: "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
 		"Droid Sans", "Helvetica Neue", sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
@@ -17,17 +17,7 @@ code {
     flex-direction: column;
 	margin-top: 10vh;
 	margin-bottom: 10vh;
-}
-
-.App-logo {
-	height: 40vmin;
-	pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-	.App-logo {
-		animation: App-logo-spin infinite 20s linear;
-	}
+    font-size: large;
 }
 
 header {
@@ -59,25 +49,4 @@ footer {
 	width: 100%;
 	padding: 1vh;
     z-index: 99;
-}
-
-section {
-	align-items: center;
-	justify-content: center;
-	display: flex;
-	flex-direction: column;
-	/* border: red solid 1px */
-}
-
-.App-link {
-	color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-	from {
-		transform: rotate(0deg);
-	}
-	to {
-		transform: rotate(360deg);
-	}
 }

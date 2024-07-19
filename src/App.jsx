@@ -6,17 +6,18 @@ import Timer from "./components/Timer";
 const col_chart = {
 	name: "temperature",
 	safe: [0, 50],
-	range_vals: [-20, -10, 0, 10, 20, 30, 40, 50, 60],
+	range_vals: [-20, -10, 0, 10, 20, 30, 40, 50, 60, 70],
 	range_cols: [
 		[135, 206, 250], // -20°C: Sky blue
 		[173, 216, 230], // -10°C: Light sky blue
 		[176, 224, 230], // 0°C: Powder blue
 		[211, 211, 211], // 10°C: Light grey
 		[240, 240, 240], // 20°C: Very light grey
-		[240, 128, 128], // 30°C: Light coral (more vibrant red)
+		[240, 150, 128], // 30°C: Light coral (more vibrant red)
 		[255, 99, 71], // 40°C: Tomato (vibrant red)
 		[255, 69, 0], // 50°C: Orange red
 		[255, 0, 0], // 60°C: Red
+		[215, 0, 0], // 70°C: Dark red
 	],
 	unit: "°C",
 };
@@ -38,7 +39,7 @@ function App() {
 		for (const record of event.message.records) {
 			const text = decoder.decode(record.data);
 			console.log("Scanned Data:", text);
-			const temperature_str = "temperature=";
+			const temperature_str = "s=";
 			if (text.startsWith(temperature_str)) {
 				const value_to_set = parseFloat(text.replace(temperature_str, ""));
 				setTemperature(value_to_set);

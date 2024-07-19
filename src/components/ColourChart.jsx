@@ -26,40 +26,37 @@ export const mapNumberToColour = (inputNumber, colourRange, numberRange) => {
 const ColourChart = ({ test, mappedNumber = 0 }) => {
 	const [colourRange, numberRange, unit] = [test?.range_cols, test?.range_vals, test?.unit || ""];
 	const [arrowPosition, setArrowPosition] = useState(0);
-	const [mappedColour, setMappedColouer] = useState([0, 0, 0]);
+	const [mappedColour, setMappedColour] = useState([0, 0, 0]);
 
-	useEffect(() => {
-		const rangeCount = numberRange.length;
+    useEffect(() => {
+        const rangeCount = numberRange.length;
+    
+        // Find the range in which the newMappedNumber falls
+        let rangeIndex = -1;
+        for (let i = 0; i < rangeCount - 1; i++) {
+            if (mappedNumber >= numberRange[i] && mappedNumber <= numberRange[i + 1]) {
+                rangeIndex = i;
+                break;
+            }
+        }
+    
+        if (rangeIndex !== -1) {
+            // Calculate the position relative to the specific range
+            const rangeStart = numberRange[rangeIndex];
+            const rangeEnd = numberRange[rangeIndex + 1];
+            const rangePercentage =
+                ((rangeIndex + (mappedNumber - rangeStart) / (rangeEnd - rangeStart)) / (rangeCount)) * 100;
+            setArrowPosition(rangePercentage);
+            console.log(mappedNumber, "results in", rangePercentage)
+        } else {
+            // Set arrow position to 0 if the mapped number is outside the range
+            setArrowPosition(mappedNumber > numberRange[numberRange.length - 1] ? 100 : 0);
+        }
+        setMappedColour(mapNumberToColour(mappedNumber, test?.range_cols, test?.range_vals));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [test, mappedNumber, numberRange]);
 
-		// Find the range in which the newMappedNumber falls
-		let rangeIndex = -1;
-		for (let i = 0; i < rangeCount - 1; i++) {
-			if (mappedNumber >= numberRange[i] && mappedNumber <= numberRange[i + 1]) {
-				rangeIndex = i;
-				break;
-			}
-		}
-
-		if (rangeIndex !== -1) {
-			// Calculate the position relative to the specific range
-			const rangeStart = numberRange[rangeIndex];
-			const rangeEnd = numberRange[rangeIndex + 1];
-			const rangePercentage =
-				(rangeIndex * 100) / rangeCount +
-				(((mappedNumber - rangeStart) / (rangeEnd - rangeStart)) * 100) / rangeCount;
-			// console.log("arrowPosition of ", test?.name, arrowPosition);
-			setArrowPosition(rangePercentage);
-		} else {
-			// Set arrow position to 0 if the mapped number is outside the range
-			setArrowPosition(mappedNumber >= numberRange[numberRange.length - 1] ? 100 : 0);
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [test, mappedNumber, numberRange]);
-
-	useEffect(() => {
-		setMappedColouer(mapNumberToColour(mappedNumber - 5, colourRange, numberRange));
-	}, [mappedColour]);
-
+    
 	return (
 		<div
 			style={{
@@ -77,15 +74,15 @@ const ColourChart = ({ test, mappedNumber = 0 }) => {
 				<div
 					style={{
 						position: "absolute",
-						top: arrowPosition ? `calc(${arrowPosition}% - 20px)` : "-10px",
+						top: `calc(${arrowPosition}% + 10px)`,
 						right: "0px",
-						display: "flex",
+						display: "inline-flex",
 						alignItems: "center",
 						textAlign: "right",
 					}}
 				>
-					<div style={{ marginRight: "5px" }}>{mappedNumber.toFixed(2) + " " + unit}</div>
-					<div
+					<span style={{ marginRight: "5px" }}>{mappedNumber.toFixed(2) + unit}</span>
+					<span
 						style={{
 							borderTop: "10px solid transparent",
 							borderBottom: "10px solid transparent",
@@ -107,14 +104,13 @@ const ColourChart = ({ test, mappedNumber = 0 }) => {
 						<div
 							style={{
 								marginLeft: "5px",
-								width: "15px",
+								width: "50px",
 								height: "40px",
 								backgroundColor: `rgb(${mappedColour})`,
 							}}
 						></div>
-						<div style={{ marginLeft: "10px" }}>
-							{numberRange[index]}
-							{" " + unit}
+						<div style={{ marginLeft: "10px", marginTop: "10px" }}>
+							{numberRange[index]} {" " + unit}
 						</div>
 					</div>
 				))}
